@@ -1,0 +1,18 @@
+{
+  "name": "splitter-stream",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "brittle tests/*.js"
+  },
+  "keywords": [],
+  "author": "Sean Zellmer <sean@lejeunerenard.com> (http://lejeunerenard.com/)",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "brittle": "^3.5.2",
+    "eslint": "^9.4.0",
+    "globals": "^15.4.0"
+  }
+}
