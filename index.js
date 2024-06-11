@@ -13,6 +13,12 @@ class SplitterStream extends Writable {
     stream.write(chunk)
     cb(null)
   }
+
+  _final () {
+    for (const stream of this.streams) {
+      stream.end()
+    }
+  }
 }
 
 module.exports = SplitterStream

@@ -29,3 +29,28 @@ test('basic', (t) => {
   t.alike(odds, [1, 3, 9])
   t.alike(evens, [2, 8])
 })
+
+test('closes outlet streams', (t) => {
+  t.plan(4)
+  const odds = []
+  const oddsStream = streamToArray(odds)
+  const evens = []
+  const evenStream = streamToArray(evens)
+
+  const splitter = new SplitterStream((chunk, enc, streams) => {
+    return streams[chunk % 2]
+  }, [evenStream, oddsStream], { objectMode: true })
+
+  splitter.write(1)
+  splitter.write(3)
+  splitter.write(2)
+  splitter.write(8)
+  splitter.write(9)
+  splitter.end()
+
+  oddsStream.on('close', () => t.pass('odds stream closed'))
+  evenStream.on('close', () => t.pass('events stream closed'))
+
+  t.alike(odds, [1, 3, 9])
+  t.alike(evens, [2, 8])
+})
