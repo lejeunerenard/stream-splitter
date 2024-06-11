@@ -14,10 +14,11 @@ class SplitterStream extends Writable {
     cb(null)
   }
 
-  _final () {
+  _final (cb) {
     for (const stream of this.streams) {
       stream.end()
     }
+    cb()
   }
 }
 
